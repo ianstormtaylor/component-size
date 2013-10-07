@@ -112,17 +112,14 @@ function kb (bytes) {
 
 
 /**
- * Get the name of a component.json `file`, with an optional `suffix`.
+ * Get the name of a component.json `file`.
  *
  * @param {String} file
- * @param {String} suffix (optional)
  */
 
-function name (file, suffix) {
+function name (file) {
   var json = require(path.resolve(file));
-  var string = json.repo || json.name;
-  if (suffix) string = string ? string + ' (' + suffix + ')' : suffix;
-  return string;
+  return json.repo || json.name;
 }
 
 
