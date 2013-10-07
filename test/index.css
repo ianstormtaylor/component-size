@@ -1,0 +1,11 @@
+
+body {
+  font-size: 54px;
+  background-color: red;
+}
+
+@media (min-height: 400px) {
+  body {
+    background-color: green;
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "component",
+  "repo": "your/component",
+  "dependencies": {
+    "component/each": "*",
+    "component/jquery": "*",
+    "component/model": "*",
+    "component/tip": "*",
+    "ianstormtaylor/reset": "*",
+    "typefaces/source-sans-regular": "*"
+  },
+  "scripts": ["index.js"],
+  "styles": ["index.css"]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "component-size",
+  "repository": "git://github.com/typefaces/component-size.git",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "A component command to list the sizes of all your component's dependencies.",
+  "keywords": [
+    "component",
+    "command",
+    "plugin",
+    "size",
+    "filesize"
+  ],
+  "dependencies": {
+    "commander": "1.0.5",
+    "component": "~0.17.6",
+    "extend": "~1.2.1",
+    "pad-component": "0.0.1",
+    "map": "git://github.com/ianstormtaylor/map",
+    "each-component": "git://github.com/component/each"
+  },
+  "bin": {
+    "component-size": "bin/component-size"
+  }
+}
