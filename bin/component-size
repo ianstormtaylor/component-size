@@ -58,6 +58,8 @@ function stat (file) {
   }
 
   console.log();
+  print('total');
+  console.log();
   print(name(file));
   console.log();
   each(packages, print);
@@ -110,14 +112,17 @@ function kb (bytes) {
 
 
 /**
- * Get the name of a component.json `file`.
+ * Get the name of a component.json `file`, with an optional `suffix`.
  *
  * @param {String} file
+ * @param {String} suffix (optional)
  */
 
-function name (file) {
+function name (file, suffix) {
   var json = require(path.resolve(file));
-  return json.repo || json.name;
+  var string = json.repo || json.name;
+  if (suffix) string = string ? string + ' (' + suffix + ')' : suffix;
+  return string;
 }
 
 
@@ -168,14 +173,21 @@ function pad (string, char, direction, length) {
 
 function sizes (file) {
   var json = require(path.resolve(file));
+  var root = name(file);
+
   var ret = {};
-  var name = json.repo || json.name || 'local';
-  ret[name] = size(file);
+  ret[root] = size(file);
 
   var deps = dependencies(file);
   for (var key in deps) {
     ret[key] = size(deps[key]);
   }
+
+  var total = 0;
+  each(ret, function (name, size) {
+    total += size;
+  });
+  ret.total = total;
 
   return ret;
 }

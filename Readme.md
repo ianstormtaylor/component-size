@@ -13,6 +13,8 @@
 
     $ component size
 
+            size : total                           323.75 kb
+
             size : your/component                    4.96 kb
 
             size : component/jquery                262.14 kb
@@ -35,6 +37,8 @@
 
     $ component size --styles
 
+            size : total                           9.28 kb
+
             size : your/component                  0.12 kb
 
             size : necolas/normalize.css           7.37 kb
@@ -56,6 +60,8 @@
   Or everything, including `fonts`, `images` and `files`:
 
     $ component size --all
+
+            size : total                           414.60 kb
 
             size : your/component                    5.08 kb
 
