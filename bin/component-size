@@ -141,25 +141,6 @@ function log (name, nameLength, size, sizeLength) {
 
 
 /**
- * Pad a `string` with `char`s in `direction` until it reaches `length`.
- *
- * @param {String} string
- * @param {String} char
- * @param {String} direction
- * @param {Number} length
- */
-
-function pad (string, char, direction, length) {
-  for (var i = string.length; i < length; i++) {
-    string = direction === 'left'
-      ? char + string
-      : string + char;
-  }
-  return string;
-}
-
-
-/**
  * Calculate the sizes of all of an component.json `file`'s dependencies.
  *
  * @param {String} file
@@ -171,11 +152,12 @@ function pad (string, char, direction, length) {
 function sizes (file) {
   var json = require(path.resolve(file));
   var root = name(file);
+  var rootpaths = ['.'].concat(json.paths || []);
 
   var ret = {};
   ret[root] = size(file);
 
-  var deps = dependencies(file);
+  var deps = dependencies(file, rootpaths);
   for (var key in deps) {
     ret[key] = size(deps[key]);
   }
@@ -213,7 +195,7 @@ function size (file) {
  * @return {Object}
  */
 
-function dependencies (file) {
+function dependencies (file, rootpaths) {
   var json = require(path.resolve(file));
   var deps = json.dependencies || {};
   var ret = {};
@@ -222,7 +204,21 @@ function dependencies (file) {
     var slug = key.replace('/', '-');
     var dep = path.resolve('components', slug, 'component.json');
     ret[key] = dep;
-    extend(ret, dependencies(dep));
+    extend(ret, dependencies(dep, rootpaths));
+  }
+
+  // also find local dependencies
+  var locals = json.local || [];
+  for (var j = 0; j < locals.length; j++) {
+    var local = locals[j];
+    for (var i = 0; i < rootpaths.length; i++) {
+      var trypath = rootpaths[i];
+      var file = path.resolve(trypath, local, 'component.json');
+      if (fs.existsSync(file)) {
+        ret[trypath + '/' + local] = file;
+        extend(ret, dependencies(file, rootpaths));
+      }
+    }
   }
 
   return ret;
