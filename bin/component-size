@@ -141,25 +141,6 @@ function log (name, nameLength, size, sizeLength) {
 
 
 /**
- * Pad a `string` with `char`s in `direction` until it reaches `length`.
- *
- * @param {String} string
- * @param {String} char
- * @param {String} direction
- * @param {Number} length
- */
-
-function pad (string, char, direction, length) {
-  for (var i = string.length; i < length; i++) {
-    string = direction === 'left'
-      ? char + string
-      : string + char;
-  }
-  return string;
-}
-
-
-/**
  * Calculate the sizes of all of an component.json `file`'s dependencies.
  *
  * @param {String} file
