@@ -243,7 +243,7 @@ function locals (file) {
   }
 
   if (!program.styles || program.all) {
-    sources.push('scripts', 'templates');
+    sources.push('scripts', 'templates', 'json');
   }
 
   if (program.all) {
