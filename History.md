@@ -1,3 +1,7 @@
+0.0.6 - November 18, 2013
+-------------------------
+* add json files to total, by [@swatinem](https://github.com/swatinem)
+
 0.0.5 - November 7, 2013
 ------------------------
 * correctly handle local deps, by [@swatinem](https://github.com/swatinem)

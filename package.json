@@ -1,7 +1,7 @@
 {
   "name": "component-size",
   "repository": "git://github.com/ianstormtaylor/component-size.git",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "description": "A component command to list the sizes of all your component's dependencies.",
   "keywords": [
