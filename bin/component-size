@@ -201,7 +201,7 @@ function dependencies (file, rootpaths) {
   var ret = {};
 
   for (var key in deps) {
-    var slug = key.replace('/', '-');
+    var slug = key.replace('/', '-').toLowerCase();
     var dep = path.resolve('components', slug, 'component.json');
     ret[key] = dep;
     extend(ret, dependencies(dep, rootpaths));
