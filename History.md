@@ -1,3 +1,8 @@
+
+0.0.8 - March 31, 2013
+----------------------
+* fix broken deps
+
 0.0.7 - February 3, 2013
 ------------------------
 * lowercase slug, by [@swatinem](https://github.com/swatinem)

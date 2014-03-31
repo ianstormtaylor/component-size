@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 
 var component = require('component');
-var each = require('each-component');
 var extend = require('extend');
 var fs = require('fs');
 var json = require('../package.json');
-var map = require('map');
 var pad = require('pad-component');
 var path = require('path');
 var program = require('commander');
@@ -45,12 +43,12 @@ function stat (file) {
   var nameLength = 0;
   var sizeLength = 0;
 
-  each(packages, function (name, size) {
-    size = kb(size);
-    packages[name] = size;
-    if (name.length > nameLength) nameLength = name.length;
+  for (var key in packages) {
+    size = kb(packages[key]);
+    packages[key] = size;
+    if (key.length > nameLength) nameLength = key.length;
     if (size.length > sizeLength) sizeLength = size.length;
-  });
+  }
 
   function print (name) {
     log(name, nameLength, packages[name], sizeLength);
@@ -62,7 +60,7 @@ function stat (file) {
   console.log();
   print(name(file));
   console.log();
-  each(packages, print);
+  for (var key in packages) print(key);
   console.log();
 }
 
@@ -76,10 +74,11 @@ function stat (file) {
 
 function sort (packages) {
   var ret = {};
-  var arr = map(packages, function (key, val) {
+  var names = Object.keys(packages);
+  var arr = names.map(function (name, val) {
     return {
-      name: key,
-      size: val
+      name: name,
+      size: packages[name]
     };
   });
 
@@ -89,7 +88,7 @@ function sort (packages) {
     return 0;
   });
 
-  each(arr, function (pkg) {
+  arr.forEach(function (pkg) {
     ret[pkg.name] = pkg.size;
   });
 
@@ -163,9 +162,7 @@ function sizes (file) {
   }
 
   var total = 0;
-  each(ret, function (name, size) {
-    total += size;
-  });
+  for (var key in ret) total += ret[key];
   ret.total = total;
 
   return ret;
